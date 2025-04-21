@@ -1,0 +1,13 @@
+.viewer {
+  .node {
+    display: inline-block;
+    margin: 0.2rem;
+    cursor: pointer;
+  }
+
+  .children {
+    padding-left: 1rem;
+    border-left: 1px dashed #ccc;
+    margin-top: 0.5rem;
+  }
+}

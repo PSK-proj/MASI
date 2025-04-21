@@ -2,4 +2,4 @@
 <app-formula-builder (treeChange)="onTree($event)"></app-formula-builder>
 
 <h2>Aktualna formuła:</h2>
-<app-formula-viewer *ngIf="currentTree" [tree]="currentTree"></app-formula-viewer>
+<app-formula-viewer [tree]="currentTree" (nodeClick)="onNodePath($event)"></app-formula-viewer>

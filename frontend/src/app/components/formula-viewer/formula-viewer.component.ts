@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MathKatexDirective } from '../../shared/math-katex.directive';
 import { AlgorithmNode } from '../../models/algorithm-node.model';
@@ -7,22 +7,17 @@ import { AlgorithmNode } from '../../models/algorithm-node.model';
   selector: 'app-formula-viewer',
   standalone: true,
   imports: [CommonModule, MathKatexDirective],
-  template: `<div mathK="{{ toKaTeX(tree) }}"></div>`,
-  styles: [
-    `
-      div {
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-    `,
-  ],
+  templateUrl: './formula-viewer.component.html',
+  styleUrls: ['./formula-viewer.component.scss'],
 })
 export class FormulaViewerComponent {
   @Input() tree!: AlgorithmNode;
+  @Output() nodeClick = new EventEmitter<number[]>();
 
   toKaTeX(node: AlgorithmNode): string {
-    if (node.type === 'uniterm') return node.name ?? '';
+    if (node.type === 'uniterm') {
+      return node.name ?? '';
+    }
     const parts: string[] = [];
     node.children!.forEach((ch, i) => {
       if (i > 0) parts.push(node.operator!);
@@ -30,5 +25,14 @@ export class FormulaViewerComponent {
     });
     const body = parts.join(' \\\\ ');
     return `\\left(\\begin{array}{l}${body}\\end{array}\\right.`;
+  }
+
+  renderNode(node: AlgorithmNode): string {
+    if (node.type === 'uniterm') return node.name ?? '';
+    return this.toKaTeX(node);
+  }
+
+  onNodeClick(path: number[]) {
+    this.nodeClick.emit(path);
   }
 }

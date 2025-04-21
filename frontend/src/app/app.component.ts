@@ -23,4 +23,8 @@ export class AppComponent {
   onTree(t: AlgorithmNode) {
     this.currentTree = t;
   }
+
+  onNodePath(path: number[]) {
+    console.log('Clicked node path', path);
+  }
 }
