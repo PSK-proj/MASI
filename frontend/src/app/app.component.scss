@@ -1,0 +1,19 @@
+.save-builder,
+.save-result {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  label {
+    width: 130px;
+    font-weight: bold;
+  }
+
+  input {
+    flex: 1;
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+}

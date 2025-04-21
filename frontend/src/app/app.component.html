@@ -1,5 +1,43 @@
 <h1>Uniterm Editor</h1>
-<app-formula-builder (treeChange)="onTree($event)"></app-formula-builder>
 
-<h2>Aktualna formuła:</h2>
-<app-formula-viewer [tree]="currentTree" (nodeClick)="onNodePath($event)"></app-formula-viewer>
+<app-formula-builder (treeChange)="onBuilderTree($event)"></app-formula-builder>
+<div class="save-builder">
+  <label for="builder-name">Nazwa sekwencji:</label>
+  <input id="builder-name" #builderName placeholder="np. Zamiana A" />
+  <button (click)="saveBuilder(builderName)">Zapisz sekwencję</button>
+</div>
+
+<hr />
+
+<app-formula-list (select)="onSelectFormula($event)"></app-formula-list>
+
+<hr />
+
+<div *ngIf="target">
+  <h3>Target: {{ target.name }}</h3>
+  <app-formula-viewer [tree]="target.tree" (nodeClick)="onNodePath($event)"></app-formula-viewer>
+</div>
+<div *ngIf="replacement">
+  <h3>Replacement: {{ replacement.name }}</h3>
+  <app-formula-viewer [tree]="replacement.tree"></app-formula-viewer>
+</div>
+
+<div *ngIf="target && replacement">
+  <button (click)="doReplace()" [disabled]="!selectedPath">
+    Zamień
+  </button>
+</div>
+
+<hr />
+
+<div *ngIf="resultTree">
+  <h3>Wynik</h3>
+  <app-formula-viewer [tree]="resultTree"></app-formula-viewer>
+  <div class="save-result">
+    <label for="result-name">Nazwa wyniku:</label>
+    <input id="result-name" #resName placeholder="np. Wynik 1" />
+    <button (click)="onSaveResult(resName)">
+      Zapisz wynik jako nową sekwencję
+    </button>
+  </div>
+</div>
