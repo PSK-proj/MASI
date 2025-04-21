@@ -1,12 +1,26 @@
 import { Component } from '@angular/core';
-import { MathKatexDirective } from './shader/katex.directive';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FormulaBuilderComponent } from './components/formula-builder/formula-builder.component';
+import { FormulaViewerComponent } from './components/formula-viewer/formula-viewer.component';
+import { AlgorithmNode } from './models/algorithm-node.model';
 
 @Component({
   selector: 'app-root',
-  imports: [MathKatexDirective],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    FormulaBuilderComponent,
+    FormulaViewerComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'uniterm-frontend';
+  currentTree!: AlgorithmNode;
+
+  onTree(t: AlgorithmNode) {
+    this.currentTree = t;
+  }
 }
