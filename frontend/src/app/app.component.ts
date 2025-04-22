@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
     children: [],
   };
 
+  preview?: { id: string; tree: AlgorithmNode; name: string };
+
   target?: { id: string; tree: AlgorithmNode; name: string };
   replacement?: { id: string; tree: AlgorithmNode; name: string };
 
@@ -58,9 +60,21 @@ export class AppComponent implements OnInit {
     tree: AlgorithmNode;
     name: string;
   }): void {
-    if (!this.target) {
-      this.target = sel;
-    } else this.replacement ??= sel;
+    this.preview = sel;
+  }
+
+  setAsTarget(): void {
+    if (this.preview) {
+      this.target = this.preview;
+      this.preview = undefined;
+      this.selectedPath = undefined;
+    }
+  }
+  setAsReplacement(): void {
+    if (this.preview) {
+      this.replacement = this.preview;
+      this.preview = undefined;
+    }
   }
 
   onNodePath(path: number[]): void {

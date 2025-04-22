@@ -1,10 +1,7 @@
-<fieldset class="formula-list">
-  <legend>Przechowalnia sekwencji</legend>
-  <ul>
-    <li *ngFor="let f of formulas">
-      <button type="button" (click)="onSelect(f._id, f.name)">
-        {{ f.name }} ({{ f.createdAt | date:'short' }})
-      </button>
-    </li>
-  </ul>
-</fieldset>
+<ul class="formula-list">
+  <li *ngFor="let f of formulas">
+    <button type="button" (click)="onSelect(f._id, f.name)">
+      {{ f.name }} ({{ f.createdAt | date:'short' }})
+    </button>
+  </li>
+</ul>

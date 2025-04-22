@@ -1,6 +1,45 @@
+.builder {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  fieldset {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+
+  .preview {
+
+    legend {
+      margin-bottom: 0.5rem;
+    }
+
+    app-formula-viewer {
+      flex: 1;
+    }
+
+    .preview-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    p {
+      font-style: italic;
+    }
+  }
+}
+
 .save-builder,
+.replace-controls,
 .save-result {
-  margin-top: 1rem;
+  margin: 1rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;

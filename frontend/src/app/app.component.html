@@ -9,7 +9,26 @@
 
 <hr />
 
-<app-formula-list (select)="onSelectFormula($event)"></app-formula-list>
+<div class="builder">
+  <fieldset class="controls">
+    <legend>Przechowalnia</legend>
+    <app-formula-list (select)="onSelectFormula($event)"></app-formula-list>
+  </fieldset>
+
+  <fieldset class="preview">
+    <legend>Podgląd</legend>
+    <ng-container *ngIf="preview">
+      <app-formula-viewer [tree]="preview.tree"></app-formula-viewer>
+      <div class="preview-actions">
+        <button (click)="setAsTarget()">Ustaw jako bazę</button>
+        <button (click)="setAsReplacement()">Ustaw jako zamiennik</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!preview">
+      <p>Wybierz sekwencję z lewej, aby ją podejrzeć</p>
+    </ng-container>
+  </fieldset>
+</div>
 
 <hr />
 
@@ -21,11 +40,8 @@
   <h3>Replacement: {{ replacement.name }}</h3>
   <app-formula-viewer [tree]="replacement.tree"></app-formula-viewer>
 </div>
-
-<div *ngIf="target && replacement">
-  <button (click)="doReplace()" [disabled]="!selectedPath">
-    Zamień
-  </button>
+<div *ngIf="target && replacement" class="replace-controls">
+  <button (click)="doReplace()" [disabled]="!selectedPath">Zamień</button>
 </div>
 
 <hr />
@@ -36,8 +52,6 @@
   <div class="save-result">
     <label for="result-name">Nazwa wyniku:</label>
     <input id="result-name" #resName placeholder="np. Wynik 1" />
-    <button (click)="onSaveResult(resName)">
-      Zapisz wynik jako nową sekwencję
-    </button>
+    <button (click)="onSaveResult(resName)">Zapisz wynik</button>
   </div>
 </div>
