@@ -12,8 +12,8 @@ import { AlgorithmNode } from '../../models/algorithm-node.model';
   styleUrls: ['./swap-section.component.scss'],
 })
 export class SwapSectionComponent {
-  @Input() target!: { id: string; tree: AlgorithmNode; name: string };
-  @Input() replacement!: { id: string; tree: AlgorithmNode; name: string };
+  @Input() target?: { id: string; tree: AlgorithmNode; name: string };
+  @Input() replacement?: { id: string; tree: AlgorithmNode; name: string };
   @Output() swap = new EventEmitter<number[]>();
 
   selectedPath?: number[];

@@ -3,3 +3,19 @@
 .replace-controls {
   @extend .save-builder;
 }
+
+.swap-section {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  .swap-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .replace-controls {
+    margin-top: 1rem;
+  }
+}

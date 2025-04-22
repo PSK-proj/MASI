@@ -1,11 +1,29 @@
-<div *ngIf="target">
-  <h3>Target: {{ target.name }}</h3>
-  <app-formula-viewer [tree]="target.tree" (nodeClick)="onNodeClick($event)"></app-formula-viewer>
-</div>
-<div *ngIf="replacement">
-  <h3>Replacement: {{ replacement.name }}</h3>
-  <app-simple-preview [tree]="replacement.tree"></app-simple-preview>
-</div>
-<div class="replace-controls">
-  <button (click)="doSwap()" [disabled]="!selectedPath">Zamień</button>
+<div class="swap-section">
+  <div class="swap-panel">
+    <h3>Target</h3>
+    <ng-container *ngIf="target; else noTarget">
+      <p><strong>{{ target.name }}</strong></p>
+      <app-formula-viewer [tree]="target.tree" (nodeClick)="onNodeClick($event)"></app-formula-viewer>
+    </ng-container>
+    <ng-template #noTarget>
+      <p><em>Nie wybrano sekwencji bazowej</em></p>
+    </ng-template>
+  </div>
+
+  <div class="swap-panel">
+    <h3>Replacement</h3>
+    <ng-container *ngIf="replacement; else noRep">
+      <p><strong>{{ replacement.name }}</strong></p>
+      <app-simple-preview [tree]="replacement.tree"></app-simple-preview>
+    </ng-container>
+    <ng-template #noRep>
+      <p><em>Nie wybrano sekwencji zamiennika</em></p>
+    </ng-template>
+  </div>
+
+  <div class="replace-controls">
+    <button (click)="doSwap()" [disabled]="!target || !replacement || !selectedPath">
+      Zamień
+    </button>
+  </div>
 </div>

@@ -7,9 +7,8 @@
   <app-store-section class="store" (assignTarget)="onAssignTarget($event)"
     (assignReplacement)="onAssignReplacement($event)"></app-store-section>
 
-  <app-swap-section *ngIf="target && replacement" class="swap" [target]="target" [replacement]="replacement"
+  <app-swap-section class="swap" [target]="target" [replacement]="replacement"
     (swap)="onSwap($event)"></app-swap-section>
 
-  <app-result-section *ngIf="resultTree" class="result" [resultTree]="resultTree"
-    (saveResult)="onSaveResult($event)"></app-result-section>
+  <app-result-section class="result" [resultTree]="resultTree" (saveResult)="onSaveResult($event)"></app-result-section>
 </div>

@@ -1,7 +1,14 @@
-<h3>Wynik</h3>
-<app-simple-preview [tree]="resultTree"></app-simple-preview>
-<div class="save-result">
-  <label for="result-name">Nazwa wyniku:</label>
-  <input id="result-name" #rname placeholder="np. Wynik 1" />
-  <button (click)="onSave(rname)">Zapisz wynik</button>
+<div class="result-section">
+  <h3>Wynik</h3>
+  <ng-container *ngIf="resultTree; else noResult">
+    <app-simple-preview [tree]="resultTree"></app-simple-preview>
+    <div class="save-result">
+      <label for="result-name">Nazwa wyniku:</label>
+      <input id="result-name" #rname placeholder="np. Wynik 1" />
+      <button (click)="onSave(rname)">Zapisz wynik</button>
+    </div>
+  </ng-container>
+  <ng-template #noResult>
+    <p><em>Brak wyniku. Wykonaj najpierw zamianę.</em></p>
+  </ng-template>
 </div>

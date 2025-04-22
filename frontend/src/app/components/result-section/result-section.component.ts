@@ -11,7 +11,7 @@ import { AlgorithmNode } from '../../models/algorithm-node.model';
   styleUrls: ['./result-section.component.scss'],
 })
 export class ResultSectionComponent {
-  @Input() resultTree!: AlgorithmNode;
+  @Input() resultTree?: AlgorithmNode;
   @Output() saveResult = new EventEmitter<string>();
 
   onSave(nameInput: HTMLInputElement) {
