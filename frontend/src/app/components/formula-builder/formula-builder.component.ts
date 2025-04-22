@@ -1,13 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MathKatexDirective } from '../../shared/math-katex.directive';
+import { SimplePreviewComponent } from '../simple-preview/simple-preview.component';
 import { AlgorithmNode } from '../../models/algorithm-node.model';
 
 @Component({
   selector: 'app-formula-builder',
   standalone: true,
-  imports: [CommonModule, FormsModule, MathKatexDirective],
+  imports: [CommonModule, FormsModule, SimplePreviewComponent],
   templateUrl: './formula-builder.component.html',
   styleUrls: ['./formula-builder.component.scss'],
 })
@@ -57,16 +57,5 @@ export class FormulaBuilderComponent implements OnInit {
   private updateTree() {
     this.localTree = this.buildTree();
     this.treeChange.emit(this.localTree);
-  }
-
-  toKaTeX(node: AlgorithmNode): string {
-    if (node.type === 'uniterm') return node.name ?? '';
-    const parts: string[] = [];
-    node.children!.forEach((ch, i) => {
-      if (i > 0) parts.push(node.operator!);
-      parts.push(this.toKaTeX(ch));
-    });
-    const body = parts.join(' \\\\ ');
-    return `\\left(\\begin{array}{l}${body}\\end{array}\\right.`;
   }
 }

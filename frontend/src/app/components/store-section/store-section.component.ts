@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormulaListComponent } from '../formula-list/formula-list.component';
-import { FormulaViewerComponent } from '../formula-viewer/formula-viewer.component';
+import { SimplePreviewComponent } from '../simple-preview/simple-preview.component';
 import { AlgorithmNode } from '../../models/algorithm-node.model';
 
 @Component({
   selector: 'app-store-section',
   standalone: true,
-  imports: [CommonModule, FormulaListComponent, FormulaViewerComponent],
+  imports: [CommonModule, FormulaListComponent, SimplePreviewComponent],
   templateUrl: './store-section.component.html',
   styleUrls: ['./store-section.component.scss'],
 })

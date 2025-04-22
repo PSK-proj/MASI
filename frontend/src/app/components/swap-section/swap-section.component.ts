@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormulaViewerComponent } from '../formula-viewer/formula-viewer.component';
+import { SimplePreviewComponent } from '../simple-preview/simple-preview.component';
 import { AlgorithmNode } from '../../models/algorithm-node.model';
 
 @Component({
   selector: 'app-swap-section',
   standalone: true,
-  imports: [CommonModule, FormulaViewerComponent],
+  imports: [CommonModule, FormulaViewerComponent, SimplePreviewComponent],
   templateUrl: './swap-section.component.html',
   styleUrls: ['./swap-section.component.scss'],
 })

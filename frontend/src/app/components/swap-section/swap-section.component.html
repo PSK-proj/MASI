@@ -4,7 +4,7 @@
 </div>
 <div *ngIf="replacement">
   <h3>Replacement: {{ replacement.name }}</h3>
-  <app-formula-viewer [tree]="replacement.tree"></app-formula-viewer>
+  <app-simple-preview [tree]="replacement.tree"></app-simple-preview>
 </div>
 <div class="replace-controls">
   <button (click)="doSwap()" [disabled]="!selectedPath">Zamień</button>

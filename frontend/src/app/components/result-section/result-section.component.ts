@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormulaViewerComponent } from '../formula-viewer/formula-viewer.component';
+import { SimplePreviewComponent } from '../simple-preview/simple-preview.component';
 import { AlgorithmNode } from '../../models/algorithm-node.model';
 
 @Component({
   selector: 'app-result-section',
   standalone: true,
-  imports: [CommonModule, FormulaViewerComponent],
+  imports: [CommonModule, SimplePreviewComponent],
   templateUrl: './result-section.component.html',
   styleUrls: ['./result-section.component.scss'],
 })

@@ -7,7 +7,7 @@
   <fieldset class="preview">
     <legend>Podgląd</legend>
     <ng-container *ngIf="preview">
-      <app-formula-viewer [tree]="preview.tree"></app-formula-viewer>
+      <app-simple-preview [tree]="preview.tree"></app-simple-preview>
       <div class="preview-actions">
         <button (click)="setAsTarget()">Ustaw jako bazę</button>
         <button (click)="setAsReplacement()">Ustaw jako zamiennik</button>
