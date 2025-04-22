@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BuilderSectionComponent } from './components/builder-section/builder-section.component';
 import { StoreSectionComponent } from './components/store-section/store-section.component';
@@ -21,6 +21,9 @@ import { FormulaService } from './services/formula.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild(StoreSectionComponent)
+  private readonly storeComp!: StoreSectionComponent;
+
   buildingTree!: AlgorithmNode;
 
   target?: { id: string; tree: AlgorithmNode; name: string };
@@ -34,7 +37,9 @@ export class AppComponent {
     this.buildingTree = tree;
   }
   onBuilderSave(name: string) {
-    this.formulaService.saveFormula(name, this.buildingTree).subscribe();
+    this.formulaService.saveFormula(name, this.buildingTree).subscribe(() => {
+      this.storeComp.reload();
+    });
   }
 
   onAssignTarget(sel: any) {
@@ -53,6 +58,8 @@ export class AppComponent {
 
   onSaveResult(name: string) {
     if (!this.resultTree) return;
-    this.formulaService.saveFormula(name, this.resultTree).subscribe();
+    this.formulaService.saveFormula(name, this.resultTree).subscribe(() => {
+      this.storeComp.reload();
+    });
   }
 }

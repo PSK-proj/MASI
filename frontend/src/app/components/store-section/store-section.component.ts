@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormulaListComponent } from '../formula-list/formula-list.component';
 import { SimplePreviewComponent } from '../simple-preview/simple-preview.component';
@@ -12,10 +12,17 @@ import { AlgorithmNode } from '../../models/algorithm-node.model';
   styleUrls: ['./store-section.component.scss'],
 })
 export class StoreSectionComponent {
+  @ViewChild(FormulaListComponent)
+  private readonly listComp!: FormulaListComponent;
+
   preview?: { id: string; tree: AlgorithmNode; name: string };
 
   @Output() assignTarget = new EventEmitter<typeof this.preview>();
   @Output() assignReplacement = new EventEmitter<typeof this.preview>();
+
+  public reload(): void {
+    this.listComp.loadList();
+  }
 
   selectPreview(sel: typeof this.preview) {
     this.preview = sel;
