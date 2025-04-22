@@ -1,57 +1,15 @@
-<h1>Uniterm Editor</h1>
+<div class="grid">
+  <h1 class="header">Uniterm Editor</h1>
 
-<app-formula-builder (treeChange)="onBuilderTree($event)"></app-formula-builder>
-<div class="save-builder">
-  <label for="builder-name">Nazwa sekwencji:</label>
-  <input id="builder-name" #builderName placeholder="np. Zamiana A" />
-  <button (click)="saveBuilder(builderName)">Zapisz sekwencję</button>
-</div>
+  <app-builder-section class="builder" (treeChange)="onBuilderTree($event)"
+    (save)="onBuilderSave($event)"></app-builder-section>
 
-<hr />
+  <app-store-section class="store" (assignTarget)="onAssignTarget($event)"
+    (assignReplacement)="onAssignReplacement($event)"></app-store-section>
 
-<div class="builder">
-  <fieldset class="controls">
-    <legend>Przechowalnia</legend>
-    <app-formula-list (select)="onSelectFormula($event)"></app-formula-list>
-  </fieldset>
+  <app-swap-section *ngIf="target && replacement" class="swap" [target]="target" [replacement]="replacement"
+    (swap)="onSwap($event)"></app-swap-section>
 
-  <fieldset class="preview">
-    <legend>Podgląd</legend>
-    <ng-container *ngIf="preview">
-      <app-formula-viewer [tree]="preview.tree"></app-formula-viewer>
-      <div class="preview-actions">
-        <button (click)="setAsTarget()">Ustaw jako bazę</button>
-        <button (click)="setAsReplacement()">Ustaw jako zamiennik</button>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="!preview">
-      <p>Wybierz sekwencję z lewej, aby ją podejrzeć</p>
-    </ng-container>
-  </fieldset>
-</div>
-
-<hr />
-
-<div *ngIf="target">
-  <h3>Target: {{ target.name }}</h3>
-  <app-formula-viewer [tree]="target.tree" (nodeClick)="onNodePath($event)"></app-formula-viewer>
-</div>
-<div *ngIf="replacement">
-  <h3>Replacement: {{ replacement.name }}</h3>
-  <app-formula-viewer [tree]="replacement.tree"></app-formula-viewer>
-</div>
-<div *ngIf="target && replacement" class="replace-controls">
-  <button (click)="doReplace()" [disabled]="!selectedPath">Zamień</button>
-</div>
-
-<hr />
-
-<div *ngIf="resultTree">
-  <h3>Wynik</h3>
-  <app-formula-viewer [tree]="resultTree"></app-formula-viewer>
-  <div class="save-result">
-    <label for="result-name">Nazwa wyniku:</label>
-    <input id="result-name" #resName placeholder="np. Wynik 1" />
-    <button (click)="onSaveResult(resName)">Zapisz wynik</button>
-  </div>
+  <app-result-section *ngIf="resultTree" class="result" [resultTree]="resultTree"
+    (saveResult)="onSaveResult($event)"></app-result-section>
 </div>

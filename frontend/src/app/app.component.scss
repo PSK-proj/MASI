@@ -1,58 +1,37 @@
-.builder {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-
-  fieldset {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 1rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-
-
-  .preview {
-
-    legend {
-      margin-bottom: 0.5rem;
-    }
-
-    app-formula-viewer {
-      flex: 1;
-    }
-
-    .preview-actions {
-      margin-top: 1rem;
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    p {
-      font-style: italic;
-    }
-  }
+:host {
+  display: block;
+  padding: 1rem;
 }
 
-.save-builder,
-.replace-controls,
-.save-result {
-  margin: 1rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.grid {
+  display: grid;
+  gap: 1rem;
 
-  label {
-    width: 130px;
-    font-weight: bold;
-  }
+  grid-template-areas:
+    "header header header"
+    "builder builder builder"
+    "store store store"
+    "swap swap result";
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
-  input {
-    flex: 1;
-    padding: 0.3rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
+.header {
+  grid-area: header;
+  margin: 0 0 1rem;
+}
+
+.builder {
+  grid-area: builder;
+}
+
+.store {
+  grid-area: store;
+}
+
+.swap {
+  grid-area: swap;
+}
+
+.result {
+  grid-area: result;
 }

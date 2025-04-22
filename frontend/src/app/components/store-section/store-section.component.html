@@ -1,0 +1,20 @@
+<div class="builder">
+  <fieldset class="controls">
+    <legend>Przechowalnia</legend>
+    <app-formula-list (select)="selectPreview($event)"></app-formula-list>
+  </fieldset>
+
+  <fieldset class="preview">
+    <legend>Podgląd</legend>
+    <ng-container *ngIf="preview">
+      <app-formula-viewer [tree]="preview.tree"></app-formula-viewer>
+      <div class="preview-actions">
+        <button (click)="setAsTarget()">Ustaw jako bazę</button>
+        <button (click)="setAsReplacement()">Ustaw jako zamiennik</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!preview">
+      <p>Wybierz sekwencję z lewej, aby ją podejrzeć</p>
+    </ng-container>
+  </fieldset>
+</div>

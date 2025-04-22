@@ -1,0 +1,42 @@
+.builder {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  fieldset {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .controls {
+
+    ul.formula-list {
+      margin: 0;
+    }
+  }
+
+  .preview {
+    legend {
+      margin-bottom: 0.5rem;
+    }
+
+    app-formula-viewer {
+      flex: 1;
+    }
+
+    .preview-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    p {
+      font-style: italic;
+    }
+  }
+}

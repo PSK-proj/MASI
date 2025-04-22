@@ -1,0 +1,5 @@
+@import '../builder-section/builder-section.component.scss';
+
+.replace-controls {
+  @extend .save-builder;
+}

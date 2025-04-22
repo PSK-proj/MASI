@@ -1,0 +1,7 @@
+<h3>Wynik</h3>
+<app-formula-viewer [tree]="resultTree"></app-formula-viewer>
+<div class="save-result">
+  <label for="result-name">Nazwa wyniku:</label>
+  <input id="result-name" #rname placeholder="np. Wynik 1" />
+  <button (click)="onSave(rname)">Zapisz wynik</button>
+</div>

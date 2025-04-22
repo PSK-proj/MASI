@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { FormulaBuilderComponent } from './components/formula-builder/formula-builder.component';
-import { FormulaViewerComponent } from './components/formula-viewer/formula-viewer.component';
-import { FormulaListComponent } from './components/formula-list/formula-list.component';
+import { BuilderSectionComponent } from './components/builder-section/builder-section.component';
+import { StoreSectionComponent } from './components/store-section/store-section.component';
+import { SwapSectionComponent } from './components/swap-section/swap-section.component';
+import { ResultSectionComponent } from './components/result-section/result-section.component';
 import { AlgorithmNode } from './models/algorithm-node.model';
 import { FormulaService } from './services/formula.service';
 
@@ -12,90 +12,47 @@ import { FormulaService } from './services/formula.service';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
-    FormulaBuilderComponent,
-    FormulaViewerComponent,
-    FormulaListComponent,
+    BuilderSectionComponent,
+    StoreSectionComponent,
+    SwapSectionComponent,
+    ResultSectionComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  @ViewChild(FormulaListComponent) listComp!: FormulaListComponent;
-
-  buildingTree: AlgorithmNode = {
-    type: 'sequence',
-    operator: ';',
-    children: [],
-  };
-
-  preview?: { id: string; tree: AlgorithmNode; name: string };
+export class AppComponent {
+  buildingTree!: AlgorithmNode;
 
   target?: { id: string; tree: AlgorithmNode; name: string };
   replacement?: { id: string; tree: AlgorithmNode; name: string };
-
-  selectedPath?: number[];
 
   resultTree?: AlgorithmNode;
 
   constructor(private readonly formulaService: FormulaService) {}
 
-  ngOnInit(): void {}
-
-  onBuilderTree(tree: AlgorithmNode): void {
+  onBuilderTree(tree: AlgorithmNode) {
     this.buildingTree = tree;
   }
-
-  saveBuilder(nameInput: HTMLInputElement): void {
-    const name = nameInput.value.trim();
-    if (!name) return;
-    this.formulaService.saveFormula(name, this.buildingTree).subscribe(() => {
-      nameInput.value = '';
-      this.listComp.loadList();
-    });
+  onBuilderSave(name: string) {
+    this.formulaService.saveFormula(name, this.buildingTree).subscribe();
   }
 
-  onSelectFormula(sel: {
-    id: string;
-    tree: AlgorithmNode;
-    name: string;
-  }): void {
-    this.preview = sel;
+  onAssignTarget(sel: any) {
+    this.target = sel;
+  }
+  onAssignReplacement(sel: any) {
+    this.replacement = sel;
   }
 
-  setAsTarget(): void {
-    if (this.preview) {
-      this.target = this.preview;
-      this.preview = undefined;
-      this.selectedPath = undefined;
-    }
-  }
-  setAsReplacement(): void {
-    if (this.preview) {
-      this.replacement = this.preview;
-      this.preview = undefined;
-    }
-  }
-
-  onNodePath(path: number[]): void {
-    if (path.length) {
-      this.selectedPath = path;
-    }
-  }
-
-  doReplace(): void {
-    if (!this.target || !this.replacement || !this.selectedPath) return;
+  onSwap(path: number[]) {
+    if (!this.target || !this.replacement) return;
     this.formulaService
-      .replace(this.target.tree, this.replacement.tree, this.selectedPath)
+      .replace(this.target.tree, this.replacement.tree, path)
       .subscribe((r) => (this.resultTree = r.result));
   }
 
-  onSaveResult(nameInput: HTMLInputElement): void {
-    const name = nameInput.value.trim();
-    if (!name || !this.resultTree) return;
-    this.formulaService.saveFormula(name, this.resultTree).subscribe(() => {
-      nameInput.value = '';
-      this.listComp.loadList();
-    });
+  onSaveResult(name: string) {
+    if (!this.resultTree) return;
+    this.formulaService.saveFormula(name, this.resultTree).subscribe();
   }
 }
