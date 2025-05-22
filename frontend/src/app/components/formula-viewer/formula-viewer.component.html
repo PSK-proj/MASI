@@ -1,0 +1,21 @@
+<div class="viewer">
+  <ng-container *ngTemplateOutlet="
+      recursive;
+      context: { $implicit: tree, path: [] }
+    "></ng-container>
+
+  <ng-template #recursive let-node let-path="path">
+    <div class="node" (click)="onNodeClick(path)">
+      <span [mathK]="renderNode(node)"></span>
+    </div>
+
+    <div *ngIf="node.type === 'sequence'" class="children">
+      <ng-container *ngFor="let child of node.children; let i = index">
+        <ng-container *ngTemplateOutlet="
+            recursive;
+            context: { $implicit: child, path: path.concat(i) }
+          "></ng-container>
+      </ng-container>
+    </div>
+  </ng-template>
+</div>

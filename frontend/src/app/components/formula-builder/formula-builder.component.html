@@ -1,0 +1,38 @@
+<div class="builder">
+  <fieldset class="controls">
+    <legend>Unitermy i separator</legend>
+    <div class="operator-row">
+      <span class="operator-label">Separator:</span>
+      <label>
+        <input type="radio" name="operator" [value]="';'" [(ngModel)]="operator"
+          (change)="onOperatorChange(operator)" />
+        ;
+      </label>
+      <label>
+        <input type="radio" name="operator" [value]="','" [(ngModel)]="operator"
+          (change)="onOperatorChange(operator)" />
+        ,
+      </label>
+    </div>
+
+    <div *ngFor="
+        let u of uniterms;
+        let i = index;
+        trackBy: trackByIndex
+      " class="uniterm-row">
+      <label [attr.for]="'uniterm-' + i">Uniterm {{ i + 1 }}</label>
+      <input id="uniterm-{{ i }}" [(ngModel)]="uniterms[i]" (ngModelChange)="onUnitermChange(i, $event)"
+        placeholder="np. A" />
+      <button type="button" (click)="removeUniterm(i)" *ngIf="uniterms.length > 1">
+        –
+      </button>
+    </div>
+
+    <button type="button" (click)="addUniterm()">+ Dodaj uniterm</button>
+  </fieldset>
+
+  <fieldset class="preview">
+    <legend>Podgląd</legend>
+    <app-simple-preview [tree]="localTree"></app-simple-preview>
+  </fieldset>
+</div>

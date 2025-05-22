@@ -1,0 +1,18 @@
+.save-builder {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  label {
+    width: 130px;
+    font-weight: bold;
+  }
+
+  input {
+    flex: 1;
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+}

@@ -1,0 +1,6 @@
+<app-formula-builder (treeChange)="onTree($event)"></app-formula-builder>
+<div class="save-builder">
+  <label for="builder-name">Nazwa sekwencji:</label>
+  <input id="builder-name" #bname placeholder="np. Zamiana A" />
+  <button (click)="onSave(bname)">Zapisz</button>
+</div>

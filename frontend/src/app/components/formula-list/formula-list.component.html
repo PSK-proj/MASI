@@ -1,0 +1,10 @@
+<ul class="formula-list">
+  <li *ngFor="let f of formulas" class="formula-item">
+    <button type="button" (click)="onSelect(f._id, f.name)">
+      {{ f.name }} ({{ f.createdAt | date: 'short' }})
+    </button>
+    <button type="button" class="delete-btn" (click)="onDelete(f._id); $event.stopPropagation()" aria-label="Usuń">
+      ✕
+    </button>
+  </li>
+</ul>
