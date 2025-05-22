@@ -17,20 +17,43 @@ export class StoreSectionComponent {
 
   preview?: { id: string; tree: AlgorithmNode; name: string };
 
-  @Output() assignTarget = new EventEmitter<typeof this.preview>();
-  @Output() assignReplacement = new EventEmitter<typeof this.preview>();
+  @Output() assignTarget = new EventEmitter<{
+    id: string;
+    tree: AlgorithmNode;
+    name: string;
+  }>();
+  @Output() assignReplacement = new EventEmitter<{
+    id: string;
+    tree: AlgorithmNode;
+    name: string;
+  }>();
+  @Output() deleted = new EventEmitter<string>();
 
   public reload(): void {
     this.listComp.loadList();
   }
 
-  selectPreview(sel: typeof this.preview) {
+  selectPreview(sel: { id: string; tree: AlgorithmNode; name: string }) {
     this.preview = sel;
   }
+
   setAsTarget() {
-    if (this.preview) this.assignTarget.emit(this.preview);
+    if (this.preview) {
+      this.assignTarget.emit(this.preview);
+    }
   }
+
   setAsReplacement() {
-    if (this.preview) this.assignReplacement.emit(this.preview);
+    if (this.preview) {
+      this.assignReplacement.emit(this.preview);
+    }
+  }
+
+  onDeleted(id: string) {
+    if (this.preview?.id === id) {
+      this.preview = undefined;
+    }
+    this.reload();
+    this.deleted.emit(id);
   }
 }

@@ -37,16 +37,25 @@ export class AppComponent {
     this.buildingTree = tree;
   }
   onBuilderSave(name: string) {
-    this.formulaService.saveFormula(name, this.buildingTree).subscribe(() => {
-      this.storeComp.reload();
-    });
+    this.formulaService
+      .saveFormula(name, this.buildingTree)
+      .subscribe(() => this.storeComp.reload());
   }
 
-  onAssignTarget(sel: any) {
+  onAssignTarget(sel: { id: string; tree: AlgorithmNode; name: string }) {
     this.target = sel;
   }
-  onAssignReplacement(sel: any) {
+  onAssignReplacement(sel: { id: string; tree: AlgorithmNode; name: string }) {
     this.replacement = sel;
+  }
+  onStoreDeleted(id: string) {
+    if (this.target?.id === id) {
+      this.target = undefined;
+    }
+    if (this.replacement?.id === id) {
+      this.replacement = undefined;
+    }
+    this.resultTree = undefined;
   }
 
   onSwap(path: number[]) {
@@ -58,8 +67,8 @@ export class AppComponent {
 
   onSaveResult(name: string) {
     if (!this.resultTree) return;
-    this.formulaService.saveFormula(name, this.resultTree).subscribe(() => {
-      this.storeComp.reload();
-    });
+    this.formulaService
+      .saveFormula(name, this.resultTree)
+      .subscribe(() => this.storeComp.reload());
   }
 }

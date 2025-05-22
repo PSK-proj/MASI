@@ -25,6 +25,10 @@ export class FormulaService {
     return this.http.post<Formula>(`${this.base}/formulas`, { name, tree });
   }
 
+  deleteFormula(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.base}/formulas/${id}`);
+  }
+
   replace(
     targetTree: AlgorithmNode,
     replacementTree: AlgorithmNode,

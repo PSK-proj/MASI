@@ -1,7 +1,7 @@
 <div class="builder">
   <fieldset class="controls">
     <legend>Przechowalnia</legend>
-    <app-formula-list (select)="selectPreview($event)"></app-formula-list>
+    <app-formula-list (select)="selectPreview($event)" (delete)="onDeleted($event)"></app-formula-list>
   </fieldset>
 
   <fieldset class="preview">

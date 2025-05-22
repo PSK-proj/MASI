@@ -23,6 +23,8 @@ export class FormulaListComponent implements OnInit {
     name: string;
   }>();
 
+  @Output() delete = new EventEmitter<string>();
+
   constructor(private readonly srv: FormulaService) {}
 
   ngOnInit(): void {
@@ -36,6 +38,22 @@ export class FormulaListComponent implements OnInit {
   onSelect(id: string, name: string): void {
     this.srv.loadFormula(id).subscribe((formula: Formula) => {
       this.select.emit({ id, tree: formula.tree, name });
+    });
+  }
+
+  onDelete(id: string): void {
+    if (!confirm('Czy na pewno chcesz usunąć tę formułę?')) {
+      return;
+    }
+    this.srv.deleteFormula(id).subscribe({
+      next: () => {
+        this.delete.emit(id);
+        this.loadList();
+      },
+      error: (err) => {
+        console.error('Delete formula error:', err);
+        alert('Nie udało się usunąć formuły');
+      },
     });
   }
 }
