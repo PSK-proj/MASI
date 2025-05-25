@@ -10,6 +10,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT ?? 4000;
+const MONGO_URI =
+  process.env.MONGO_URI ?? "mongodb://localhost:27017/unitermdb";
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +20,7 @@ app.use("/replace", replaceRoute);
 app.use("/formulas", formulasRoute);
 
 mongoose
-  .connect(process.env.MONGO_URI!)
+  .connect(MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
     app.listen(PORT, () => {

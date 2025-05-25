@@ -1,6 +1,6 @@
 <div class="swap-section">
   <div class="swap-panel">
-    <h3>Target</h3>
+    <h3>Baza</h3>
     <ng-container *ngIf="target; else noTarget">
       <p><strong>{{ target.name }}</strong></p>
       <app-formula-viewer [tree]="target.tree" (nodeClick)="onNodeClick($event)"></app-formula-viewer>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="swap-panel">
-    <h3>Replacement</h3>
+    <h3>Zamiennik</h3>
     <ng-container *ngIf="replacement; else noRep">
       <p><strong>{{ replacement.name }}</strong></p>
       <app-simple-preview [tree]="replacement.tree"></app-simple-preview>
